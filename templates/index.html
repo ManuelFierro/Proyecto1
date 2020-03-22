@@ -9,9 +9,10 @@
 	<body>
 		<div class="login">
 			<h1>Login</h1>
+			<div class="msg">Logeado como {{ sesion }}</div>
 			<div class="links">
 				<a href="{{ url_for('login') }}" class="active">Login</a>
-				<a href="#">Register</a>
+				<a href="{{ url_for('registro') }}">Registro</a>
 			</div>
 			<form action="{{ url_for('login') }}" method="post">
 				<label for="username">
@@ -22,7 +23,7 @@
 					<i class="fas fa-lock"></i>
 				</label>
 				<input type="password" name="password" placeholder="Password" id="password" required>
-				<div class="msg">{{ msg }}</div>
+				<div class="msg">{{ mensaje }}</div>
 				<input type="submit" value="Login">
 			</form>
 		</div>
