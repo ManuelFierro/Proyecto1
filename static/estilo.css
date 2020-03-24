@@ -2,8 +2,10 @@
     DEMO STYLE
 */
 
+
 body {
-    background: #fafafa;
+    background: black;
+
 }
 
 p {
@@ -22,11 +24,13 @@ a:focus {
 }
 
 .navbar {
-    background: #fff;
+    font-family:monospace;
+    background: #0ab3a3;
     border: none;
     border-radius: 0;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
+
 
 .navbar-btn {
     box-shadow: none;
@@ -41,6 +45,85 @@ a:focus {
     margin: 40px 0;
 }
 
+button:hover {
+    background-color: #c7c7c7;
+    border-color:#c7c7c7;
+
+}
+
+/* ---------------------------------------------------
+    LOGIN Y REGISTRO
+----------------------------------------------------- */
+
+.login, .registro {
+  	width: 380px;
+  	background-color: #ffffff;
+  	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+  	margin: 20px auto;
+}
+.login h1, .register h1 {
+  	text-align: center;
+  	color: #5b6574;
+  	font-size: 24px;
+  	padding: 20px 0 20px 0;
+  	border-bottom: 1px solid #dee0e4;
+}
+.login .links, .registro .links {
+  	display: flex;
+  	padding: 0 15px;
+}
+.login .links a, .registro .links a {
+  	color: #adb2ba;
+  	text-decoration: none;
+  	display: inline-flex;
+  	padding: 0 10px 5px 10px;
+  	font-weight: bold;
+}
+.login .links a:hover, .registro .links a:hover {
+  	color: #9da3ac;
+}
+.login .links a.active, .registro .links a.active {
+  	border-bottom: 3px solid #0ab3a3;
+  	color: #0ab3a3;
+}
+.login form, .registro form {
+  	display: flex;
+  	flex-wrap: wrap;
+  	justify-content: center;
+  	padding-top: 20px;
+}
+.login form label, .registro form label {
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	width: 40px;
+  	height: 40px;
+  	background-color: #0ab3a3;
+  	color: #ffffff;
+}
+.login form input[type="password"], .login form input[type="text"], .registro form input[type="password"], .registro form input[type="text"] {
+  	width: 310px;
+  	height: 40px;
+  	border: 1px solid #dee0e4;
+  	margin-bottom: 20px;
+  	padding: 0 15px;
+}
+.login form input[type="submit"], .registro form input[type="submit"] {
+  	width: 100%;
+  	padding: 15px;
+  	margin-top: 20px;
+  	background-color: #0ab3a3;
+  	border: 0;
+  	cursor: pointer;
+  	font-weight: bold;
+  	color: #ffffff;
+  	transition: background-color 0.2s;
+}
+.login form input[type="submit"]:hover, .registro form input[type="submit"]:hover {
+  	background-color: #006c62;
+  	transition: background-color 0.2s;
+}
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -50,49 +133,52 @@ a:focus {
     width: 100%;
 }
 
-#sidebar {
+#barralat {
+    font-family: monospace;
+    font-weight: 900;
     width: 250px;
     top: 0;
     left: 0;
-    background: #7386D5;
-    color: #fff;
+    background: #000;
+    color: #959595;
     transition: all 0.3s;
+    font-size: 13px;
+    line-height: 1.5;
+    text-decoration: none;
 }
 
-#sidebar.active {
+#barralat.active {
     margin-left: -250px;
+    text-decoration: none;
 }
 
-#sidebar .sidebar-header {
-    padding: 20px;
-    background: #6d7fcc;
-}
-
-#sidebar ul.components {
+#barralat ul.components {
     padding: 20px 0;
     border-bottom: 1px solid #47748b;
 }
 
-#sidebar ul p {
-    color: #fff;
+#barralat ul p {
+    color:  #959595;
     padding: 10px;
 }
 
-#sidebar ul li a {
+#barralat ul li a {
+    font-family:monospace;
+    color:  #959595;
     padding: 10px;
-    font-size: 1.1em;
+    text-decoration: none;
     display: block;
 }
 
-#sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
+#barralat ul li a:hover {
+    color:  WHITE;
+    background: #0ab3a3;
 }
 
-#sidebar ul li.active>a,
+#barralat ul li.active>a,
 a[aria-expanded="true"] {
-    color: #fff;
-    background: #6d7fcc;
+    color:  WHITE;
+    background: #0ab3a3;
 }
 
 a[data-toggle="collapse"] {
@@ -110,7 +196,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
+    background: #0ab3a3;
 }
 
 ul.CTAs {
@@ -129,7 +215,8 @@ ul.CTAs a {
     CONTENT STYLE
 ----------------------------------------------------- */
 
-#content {
+#contenido {
+    font-family:monospace;
     width: calc(100% - 250px);
     padding: 40px;
     min-height: 100vh;
@@ -138,7 +225,7 @@ ul.CTAs a {
     right: 0;
 }
 
-#content.active {
+#contenido.active {
     width: 100%;
 }
 
@@ -147,19 +234,19 @@ ul.CTAs a {
 ----------------------------------------------------- */
 
 @media (max-width: 768px) {
-    #sidebar {
+    #barralat {
         margin-left: -250px;
     }
-    #sidebar.active {
+    #barralat.active {
         margin-left: 0;
     }
     #content {
         width: 100%;
     }
-    #content.active {
+    #contenido.active {
         width: calc(100% - 250px);
     }
-    #sidebarCollapse span {
+    #barraCollapse span {
         display: none;
     }
 }

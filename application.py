@@ -11,7 +11,15 @@ db = scoped_session(sessionmaker(bind=motor))
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    cuenta = ''
+    if 'logeado' in session:
+        # query para obtener todos los datos del usuario
+        # datos = db.execute('SELECT * FROM usuarios WHERE usuario= :usuario',
+        # {"usuario": session['usuario']}).fetchone()
+        cuenta = session['usuario']
+        # muestra la informacion del usuario en el perfil.
+        return render_template('index.html', cuenta=cuenta)
+    return render_template("index.html", cuenta=cuenta)
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -36,7 +44,7 @@ def login():
             # si la los datos no coninciden..
             mensaje = '¡Verifique sus datos!'
 
-    return render_template('index.html', mensaje=mensaje, sesion=sesion)
+    return render_template('login.html', mensaje=mensaje, sesion=sesion)
 
 
 @app.route('/registro', methods=['GET', 'POST'])
@@ -76,7 +84,7 @@ def home():
         cuenta = session['usuario']
 
         # si el usuario esta logeado abrir pagina principal o home
-        return render_template('home.html', cuenta=cuenta)
+        return render_template('index.html', cuenta=cuenta)
 
     # si no lo esta redireccionar al login
     return redirect(url_for('login'))
@@ -101,7 +109,8 @@ def perfil():
 def logout():
     # limpia los datos del session
     session.pop('logeado', None)
-    session.pop('ususario', None)
+    session.pop('usuario', None)
+    session.pop('password', None)
 
     # redirecciona al login
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))

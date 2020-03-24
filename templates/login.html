@@ -4,12 +4,12 @@
 
 {% block content %}
 <div class="login">
-		<h1>Registro</h1>
+		<h1>Ingresar</h1>
 		<div class="links">
-			<a href="{{ url_for('login') }}" >Ingresar</a>
-			<a href="{{ url_for('registro') }}" class="active" >Registro</a>
+			<a href="{{ url_for('login') }}" class="active">Ingresar</a>
+			<a href="{{ url_for('registro') }}">Registro</a>
 		</div>
-		<form action="{{ url_for('registro') }}" method="post" autocomplete="off">
+		<form action="{{ url_for('login') }}" method="post">
 			<label for="usuario">
 				<i class="fas fa-user"></i>
 			</label>
@@ -19,9 +19,8 @@
 			</label>
 			<input type="password" name="password" placeholder="Password" id="password" required>
 			<div class="msg">{{ mensaje }}</div>
-			<input type="submit" value="registro">
+			<input type="submit" value="Ingresar">
 		</form>
 </div>
-
 
 {% endblock %}

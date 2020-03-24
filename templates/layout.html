@@ -6,27 +6,24 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 
 	</head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light">
 		<div class="container-fluid">
 
-			<button type="button" id="sidebarCollapse" class="btn btn-info">
+			<button type="button" id="barraCollapse" class="btn">
 				<i class="fa fa-book"></i>
 				<span>Categorias</span>
 			</button>
 
-
-
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-				<form class="mx-2 my-auto d-inline ">
+				<form class="mx-2 d-inline ">
 		            <div class="input-group">
 		                <input type="text" class="form-control border border-right-0" placeholder="Buscar...">
 		                <span class="input-group-append">
-		                    <button class="btn btn-outline-secondary border border-left-0" type="button">
+		                    <button class="btn border-left-0" type="button">
 		                        <i class="fa fa-search"></i>
 		                    </button>
 		                </span>
@@ -35,19 +32,19 @@
 
 				<ul class="nav navbar-nav ml-auto">
 					<li class="nav-item active">
-						<a class="fa fa-home fa-lg nav-link" href="{{ url_for('home') }}"><i class=""></i> Menu principal</a>
+						<a class="fa fa-home fa-lg nav-link" href="{{ url_for('index') }}"> Menu principal</a>
 					</li>
 					<li class="nav-item">
-						<a class="fa fa-user fa-lg nav-link" href="{{ url_for('perfil') }}"><i class=""></i> Perfil</a>
+						 <a class="fas fa-user fa-lg nav-link" href="{{ url_for('perfil') }}"> Perfil</a>
 					</li>
 					<li class="nav-item">
-						<a class="fa fa-sign-out fa-lg nav-link" href="{{ url_for('logout') }}"><i class=""></i> Logout</a>
+						{% if session['logeado'] %}
+					    <a class="fas fa-sign-out-alt fa-lg nav-link" href="{{ url_for('logout') }}"> Logout</a>
+					    {% else %}
+					    <a class="fas fa-sign-in-alt fa-lg nav-link" href="{{ url_for('login') }}"> Login</a>
+					    {% endif %}
+					</li>
 
-					</li>
-					<li class="nav-item">
-						<a class="nav-link"></i>logeado como {{ cuenta }}</a>
-
-					</li>
 				</ul>
 			</div>
 		</div>
@@ -55,54 +52,42 @@
 
 	<div class="wrapper">
 		<!-- Sidebar  -->
-		<nav id="sidebar">
-			<div class="sidebar-header">
-				<h3>Bootstrap Sidebar</h3>
-			</div>
+		<nav id="barralat">
 
 			<ul class="list-unstyled components">
 				<li class="active">
-					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">MENU PRINCIPAL</a>
 					<ul class="collapse list-unstyled" id="homeSubmenu">
 						<li>
-							<a href="#">Home 1</a>
+							<a href="#">OPCION</a>
 						</li>
 						<li>
-							<a href="#">Home 2</a>
-						</li>
-						<li>
-							<a href="#">Home 3</a>
+							<a href="#">OPCION 2</a>
 						</li>
 					</ul>
 				</li>
 				<li>
-					<a href="#">About</a>
-				</li>
-				<li>
-					<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+					<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">OPCION</a>
 					<ul class="collapse list-unstyled" id="pageSubmenu">
 						<li>
-							<a href="#">Page 1</a>
+							<a href="#">OPCION 1</a>
 						</li>
 						<li>
-							<a href="#">Page 2</a>
+							<a href="#">OPCION 2</a>
 						</li>
 						<li>
-							<a href="#">Page 3</a>
+							<a href="#">OPCION 3</a>
 						</li>
 					</ul>
 				</li>
 				<li>
-					<a href="#">Portfolio</a>
-				</li>
-				<li>
-					<a href="#">Contact</a>
+					<a href="#">LIBROS</a>
 				</li>
 			</ul>
 
 
 		</nav>
-		<div id="content" class="sunny-morning-gradient color-block content">
+		<div id="contenido" class="color-block content">
 
 				{% block content %}{% endblock %}
 
@@ -120,12 +105,12 @@
 
 		<script type="text/javascript">
 			$(document).ready(function () {
-				$("#sidebar").mCustomScrollbar({
+				$("#barralat").mCustomScrollbar({
 					theme: "minimal"
 				});
 
-				$('#sidebarCollapse').on('click', function () {
-					$('#sidebar, #content').toggleClass('active');
+				$('#barraCollapse').on('click', function () {
+					$('#barralat, #contenido').toggleClass('active');
 					$('.collapse.in').toggleClass('in');
 					$('a[aria-expanded=true]').attr('aria-expanded', 'false');
 				});
