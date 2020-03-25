@@ -3,11 +3,15 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from datetime import date
 
+
 app = Flask(__name__)
 app.secret_key = "shit"
 
 motor = create_engine(
     'postgres://tybnzuug:sEd-YLwtFP6juILFYUkAKmwTtHpoNasU@drona.db.elephantsql.com:5432/tybnzuug')
+# 'mysql+mysqldb://waveinc:DANTE8888@waveinc.mysql.pythonanywhere-services.com:3306/waveinc$proyecto1')
+
+
 db = scoped_session(sessionmaker(bind=motor))
 
 
