@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		
 		<title>{% block title %}{% endblock %}</title>
 		<link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
 		<link rel="stylesheet" href="{{ url_for('static', filename='all.css') }}">
@@ -11,44 +12,64 @@
 
 	</head>
 <body>
-	<nav class=" sticky-top navbar navbar-expand-lg navbar-light">
-		<div class="container-fluid">
 
-			<button type="button" id="barraCollapse" class="btn">
-				<i class="fa fa-book"></i>
-				<span>Categorias</span>
-			</button>
+	<nav class="navbar navbar-expand-lg bg-dark navbar-dark ">
+		<!-- CATEGORIAS -->
+		  <a class="navbar-brand"><button type="button" id="barraCollapse" class="btn ml-auto">
+			  <i class="fa fa-book"></i>
+			  <span>Categorias</span>
+		  </button></a>
+		  <!-- CATEGORIAS -->
+	  <!-- BOTON SEARCH -->
+	 <form class="mx-2 d-inline ">
+		 <div class="input-group">
+			 <input type="text" class="form-control border border-right-0" placeholder="Buscar...">
+			 <span class="input-group-append">
+				 <button class="btn border-left-0 " type="button">
+					 <i class="fa fa-search"></i>
+				 </button>
+			 </span>
+		 </div>
+	 </form>
+	  <!-- BOTON SEARCH -->
+		<!-- BOTON COLAPSABLE -->
+	    <button class="navbar-toggler  ml-auto mr-1" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+	        <span class="navbar-toggler-icon"></span>
+	    </button>
+		<!-- BOTON COLAPSABLE -->
+		 <!-- MENU BARRANAV -->
+	    <div class="collapse navbar-collapse flex-grow-0 "  id="navbarSupportedContent">
+			<ul class="navbar-nav text-right">
+			<li class="nav-item active">
+			 <a class=" fa-lg nav-link " href="{{ url_for('index') }}"> <i class="fa fa-home"></i> Menu principal</a>
+			</li>
+			<li class="nav-item">
+				<a class="fa-lg nav-link " href="{{ url_for('perfil') }}"><span><i class="fas fa-user"></i> Perfil</span> </a>
+			</li>
+			<li class="nav-item dropdown">
+			  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Dropdown
+			  </a>
+			  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="#">Action</a>
+				<a class="dropdown-item" href="#">Another action</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#">Something else here</a>
+			  </div>
+			</li>
+			<li class="nav-item">
+				{% if session['logeado'] %}
+			   <a class="fa-lg nav-link" href="{{ url_for('logout') }}"><span><i class="fas fa-sign-out-alt"></i> Logout</span> </a>
+			   {% else %}
+			   <a class="fa-lg nav-link" href="{{ url_for('login') }}"><span><i class="fas fa-sign-in-alt"></i> Login</span> </a>
+			   {% endif %}
+			  </li>
+		  </ul>
+	    </div>
+	 <!-- MENU BARRANAV -->
 
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<form class="mx-2 d-inline ">
-		            <div class="input-group">
-		                <input type="text" class="form-control border border-right-0" placeholder="Buscar...">
-		                <span class="input-group-append">
-		                    <button class="btn border-left-0" type="button">
-		                        <i class="fa fa-search"></i>
-		                    </button>
-		                </span>
-		            </div>
-		        </form>
+	<!-- BARRA DE NAVEGACION) -->
 
-				<ul class="nav navbar-nav ml-auto">
-					<li class="nav-item active">
-						<a class=" fa-lg nav-link" href="{{ url_for('index') }}"> <i class="fa fa-home"></i> Menu principal</a>
-					</li>
-					<li class="nav-item">
-						 <a class="fa-lg nav-link" href="{{ url_for('perfil') }}"><span><i class="fas fa-user"></i> Perfil</span> </a>
-					</li>
-					<li class="nav-item">
-						{% if session['logeado'] %}
-					    <a class="fa-lg nav-link" href="{{ url_for('logout') }}"><span><i class="fas fa-sign-out-alt"></i> Logout</span> </a>
-					    {% else %}
-					    <a class="fa-lg nav-link" href="{{ url_for('login') }}"><span><i class="fas fa-sign-in-alt"></i> Login</span> </a>
-					    {% endif %}
-					</li>
-
-				</ul>
-			</div>
-		</div>
 	</nav>
 
 	<div class="wrapper">

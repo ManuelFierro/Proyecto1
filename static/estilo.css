@@ -51,6 +51,7 @@ button:hover {
 
 }
 
+
 /* ---------------------------------------------------
     LOGIN Y REGISTRO
 ----------------------------------------------------- */
@@ -301,7 +302,7 @@ ul.CTAs a {
     Datos de la cuenta
 ----------------------------------------------------- */
 .perfil {
-  	width: 40%;
+  	width: 70%;
   	background-color: #ffffff;
   	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
   	margin: 20px 20px;
@@ -332,11 +333,19 @@ ul.CTAs a {
 }
 
 
+
+@media (max-width: 800px) {
+  #perfil{
+    width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+  }
+}
+
+
 /* ---------------------------------------------------
     Datos de la cuenta RESEÑAS
 ----------------------------------------------------- */
 .perfilR {
-  	width: 45%;
+  	width: 60%;
   	background-color: #ffffff;
   	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
   	margin: 20px 40px;
@@ -373,6 +382,7 @@ ul.CTAs a {
 
 
 .estrella {
+    width: 70%;
     background-color: #ffffff;
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
     margin: 10px 20px 10px;
@@ -391,7 +401,7 @@ ul.CTAs a {
     color:  #deb217;
 }
 #sin {
-    font-size:30px;
+    font-size: 30px;
     display: inline-block;
     content: "\2605";
     color:  #ccc;
