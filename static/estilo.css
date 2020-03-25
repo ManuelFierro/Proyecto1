@@ -132,6 +132,12 @@ button:hover {
     display: flex;
     width: 100%;
 }
+#barralat .sidebar-header h3{
+    padding: 20px;
+    background:  #0ab3a3;
+    font-size: 40px;
+    color: white;
+}
 
 #barralat {
     font-family: monospace;
@@ -140,7 +146,7 @@ button:hover {
     top: 0;
     left: 0;
     background: #000;
-    color: #959595;
+
     transition: all 0.3s;
     font-size: 13px;
     line-height: 1.5;
@@ -158,13 +164,13 @@ button:hover {
 }
 
 #barralat ul p {
-    color:  #959595;
+    color:  #d7d7d7;
     padding: 10px;
 }
 
 #barralat ul li a {
     font-family:monospace;
-    color:  #959595;
+    color:  #d7d7d7;
     padding: 10px;
     text-decoration: none;
     display: block;
@@ -177,7 +183,7 @@ button:hover {
 
 #barralat ul li.active>a,
 a[aria-expanded="true"] {
-    color:  WHITE;
+    color:  WHITE !important;
     background: #0ab3a3;
 }
 
@@ -295,7 +301,7 @@ ul.CTAs a {
     Datos de la cuenta
 ----------------------------------------------------- */
 .perfil {
-  	width: 50%;
+  	width: 40%;
   	background-color: #ffffff;
   	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
   	margin: 20px 20px;
@@ -330,7 +336,7 @@ ul.CTAs a {
     Datos de la cuenta RESEÑAS
 ----------------------------------------------------- */
 .perfilR {
-  	width: 40%;
+  	width: 45%;
   	background-color: #ffffff;
   	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
   	margin: 20px 40px;

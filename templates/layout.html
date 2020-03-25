@@ -4,13 +4,14 @@
 		<meta charset="utf-8">
 		<title>{% block title %}{% endblock %}</title>
 		<link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='all.css') }}">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 
 	</head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light">
+	<nav class=" sticky-top navbar navbar-expand-lg navbar-light">
 		<div class="container-fluid">
 
 			<button type="button" id="barraCollapse" class="btn">
@@ -32,16 +33,16 @@
 
 				<ul class="nav navbar-nav ml-auto">
 					<li class="nav-item active">
-						<a class="fa fa-home fa-lg nav-link" href="{{ url_for('index') }}"> Menu principal</a>
+						<a class=" fa-lg nav-link" href="{{ url_for('index') }}"> <i class="fa fa-home"></i> Menu principal</a>
 					</li>
 					<li class="nav-item">
-						 <a class="fas fa-user fa-lg nav-link" href="{{ url_for('perfil') }}"> Perfil</a>
+						 <a class="fa-lg nav-link" href="{{ url_for('perfil') }}"><span><i class="fas fa-user"></i> Perfil</span> </a>
 					</li>
 					<li class="nav-item">
 						{% if session['logeado'] %}
-					    <a class="fas fa-sign-out-alt fa-lg nav-link" href="{{ url_for('logout') }}"> Logout</a>
+					    <a class="fa-lg nav-link" href="{{ url_for('logout') }}"><span><i class="fas fa-sign-out-alt"></i> Logout</span> </a>
 					    {% else %}
-					    <a class="fas fa-sign-in-alt fa-lg nav-link" href="{{ url_for('login') }}"> Login</a>
+					    <a class="fa-lg nav-link" href="{{ url_for('login') }}"><span><i class="fas fa-sign-in-alt"></i> Login</span> </a>
 					    {% endif %}
 					</li>
 
@@ -52,28 +53,50 @@
 
 	<div class="wrapper">
 		<!-- Sidebar  -->
-		<nav id="barralat">
+		<nav class="" id="barralat">
+
+			<div class="sidebar-header">
+            <h3>Biblio
+				TEK</h3>
+        </div>
 
 			<ul class="list-unstyled components">
 				<li class="active">
-					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">MENU PRINCIPAL</a>
-					<ul class="collapse list-unstyled" id="homeSubmenu">
+					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> <span><i class="fas fa-user"></i> MENU PRINCIPAL</span> </a>
+					<ul  class="active collapse list-unstyled" id="homeSubmenu">
 						<li>
-							<a href="#">OPCION</a>
+							<a class="nav-link" href="{{ url_for('perfil') }}"><span><i class="fas fa-user"></i> Perfil</span></a>
 						</li>
 						<li>
-							<a href="#">OPCION 2</a>
+							{% if session['logeado'] %}
+						    <a class="nav-link" href="{{ url_for('logout') }}"><span><i class="fas fa-sign-out-alt"></i> Logout</span></a>
+						    {% else %}
+						    <a class="nav-link" href="{{ url_for('login') }}"><span><i class="fas fa-sign-in-alt"></i> Login</span></a>
+						    {% endif %}
 						</li>
 					</ul>
 				</li>
+
 				<li>
-					<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">OPCION</a>
-					<ul class="collapse list-unstyled" id="pageSubmenu">
+					<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span><i class="fas fa-book-reader"></i> LIBROS</span> </a>
+					<ul style="color: white" class="collapse list-unstyled" id="pageSubmenu">
 						<li>
-							<a href="#">OPCION 1</a>
+							<a href="#">A B C D </a>
 						</li>
 						<li>
-							<a href="#">OPCION 2</a>
+							<a href="#">E F G H</a>
+						</li>
+						<li>
+							<a href="#">I J K L</a>
+						</li>
+						<li>
+							<a href="#">M N O P</a>
+						</li>
+						<li>
+							<a  href="#">Q R S T</a>
+						</li>
+						<li >
+							<a href="#">U V W X Y Z</a>
 						</li>
 					</ul>
 				</li>
@@ -84,6 +107,7 @@
 
 
 		</nav>
+
 		<div id="contenido" class="color-block content">
 
 				{% block content %}{% endblock %}
