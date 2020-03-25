@@ -1,6 +1,8 @@
 from flask import Flask, render_template, url_for, session, request, redirect
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+from datetime import date
+
 app = Flask(__name__)
 app.secret_key = "shit"
 
@@ -9,21 +11,23 @@ motor = create_engine(
 db = scoped_session(sessionmaker(bind=motor))
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
+    if request.args.get('msg'):
+        msg = request.args['msg']
+    else:
+        msg = ''
     cuenta = ''
     if 'logeado' in session:
-        # query para obtener todos los datos del usuario
-        # datos = db.execute('SELECT * FROM usuarios WHERE usuario= :usuario',
-        # {"usuario": session['usuario']}).fetchone()
         cuenta = session['usuario']
         # muestra la informacion del usuario en el perfil.
         return render_template('index.html', cuenta=cuenta)
-    return render_template("index.html", cuenta=cuenta)
+    return render_template("index.html", cuenta=cuenta, msg=msg)
 
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
+
     mensaje = ''
     sesion = ''
     if request.method == "POST" and 'usuario' in request.form and 'password' in request.form:
@@ -79,6 +83,7 @@ def registro():
 
 @app.route('/home')
 def home():
+
     # comprueba si esta activo el login
     if 'logeado' in session:
         cuenta = session['usuario']
@@ -90,19 +95,49 @@ def home():
     return redirect(url_for('login'))
 
 
-@app.route('/perfil')
+@app.route('/perfil', methods=['GET', 'POST'])
 def perfil():
+
     # verifica si esta activo el login
     if 'logeado' in session:
-        # query para obtener todos los datos del usuario
-        # datos = db.execute('SELECT * FROM usuarios WHERE usuario= :usuario',
-        # {"usuario": session['usuario']}).fetchone()
         cuenta = session['usuario']
+        resenas = db.execute("SELECT resena,isbn,rating FROM resenas WHERE usuario= :usuario",
+                             {"usuario": cuenta}).fetchall()
+        if request.args.get('mensaje'):
+            mensaje = request.args['mensaje']
+        else:
+            mensaje = ''
         # muestra la informacion del usuario en el perfil.
-        return render_template('perfil.html', cuenta=cuenta)
+        return render_template('perfil.html', resenas=resenas, mensaje=mensaje)
+    msg = 'Para entrar al perfil debes estar logeado'
+    # User is not loggedin redirect to login page
+    return redirect(url_for('index', msg=msg))
+
+
+@app.route('/resena', methods=['GET', 'POST'])
+def resena():
+    # variable mensaje para mandar mensajes...
+    mensaje = ''
+    cuenta = session['usuario']
+
+    # verifica si esta activo el login
+    if request.method == 'POST' and 'resena' in request.form and 'rating' in request.form:
+        resena = resena = request.form.get("resena")
+        rating = request.form.get("rating")
+        db.execute("INSERT INTO resenas (usuario,isbn,resena,rating) VALUES (:usuario,1416949658, :resena, :rating)",
+                   {"resena": resena, "usuario": cuenta, "rating": rating})
+        db.commit()
+        mensaje = 'Se agregó una nueva reseña'
+        # muestra la informacion del usuario en el perfil.
+
+        return redirect(url_for('perfil', mensaje=mensaje))
+
+    elif request.method == 'POST':
+        # si el formulario esta vacio muestre mensaje
+        msg = 'no se pudo enviar el mensaje'
 
     # User is not loggedin redirect to login page
-    return redirect(url_for('login'))
+    return redirect(url_for('perfil', msg=msg))
 
 
 @app.route('/logout')

@@ -250,3 +250,179 @@ ul.CTAs a {
         display: none;
     }
 }
+
+/* ---------------------------------------------------
+    ESTRELLAS
+----------------------------------------------------- */
+
+.rating {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+.rating > input:checked ~ label {
+    color: #ffc700;
+}
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: #deb217;
+}
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+/* ---------------------------------------------------
+    Datos de la cuenta
+----------------------------------------------------- */
+.perfil {
+  	width: 50%;
+  	background-color: #ffffff;
+  	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+  	margin: 20px 20px;
+    padding-bottom: 5px;
+}
+.perfil h1 {
+  	color: #5b6574;
+  	font-size: 24px;
+  	padding: 5px 5px 5px 45px;
+  	border-bottom: 1px solid #dee0e4;
+}
+.perfil .usuario {
+  	display: flex;
+  	padding: 0 45px;
+}
+.perfil .usuario a {
+  	color: #adb2ba;
+  	text-decoration: none;
+  	display: inline-flex;
+  	font-weight: bold;
+}
+.perfil .usuario a:hover {
+  	color: #9da3ac;
+}
+.perfil .usuario a.active {
+  	border-bottom: 3px solid #0ab3a3;
+  	color: #0ab3a3;
+}
+
+
+/* ---------------------------------------------------
+    Datos de la cuenta RESEÑAS
+----------------------------------------------------- */
+.perfilR {
+  	width: 40%;
+  	background-color: #ffffff;
+  	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+  	margin: 20px 40px;
+    padding-bottom: 5px;
+}
+.perfilR h2 {
+  	text-align: center;
+  	color: #5b6574;
+  	font-size: 20px;
+  	padding: 10px 0 10px 0;
+  	border-bottom: 1px solid #dee0e4;
+}
+.perfilR .rev {
+  	display: flex;
+    padding: 0 20px;
+}
+.perfilR .rev a {
+  	color: #adb2ba;
+  	text-decoration: none;
+  	display: inline-flex;
+  	font-weight: bold;
+}
+.perfilR .rev a:hover {
+  	color: #0ab3a3;
+}
+.perfilR .rev a.active {
+  	border-bottom: 3px solid #9da3ac;
+  	color: #9da3ac;
+}
+
+/* ---------------------------------------------------
+    CALIFICACIONES
+----------------------------------------------------- */
+
+
+.estrella {
+    background-color: #ffffff;
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+    margin: 10px 20px 10px;
+}
+
+.estrella .container{
+    display: inline-block;
+    margin: 0px 0px 5px 5px;
+    resize: none;
+}
+
+.estrella  span{
+    font-size:30px;
+    display: inline-block;
+    content: "\2605";
+    color:  #deb217;
+}
+#sin {
+    font-size:30px;
+    display: inline-block;
+    content: "\2605";
+    color:  #ccc;
+}
+
+
+/* ---------------------------------------------------
+    RESEÑAS
+----------------------------------------------------- */
+.resenas form label {
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	width: 40px;
+  	height: 40px;
+  	background-color: #0ab3a3;
+  	color: #ffffff;
+}
+.resenas form input[type="text"] {
+  	width: 310px;
+  	height: 40px;
+  	border: 1px solid #dee0e4;
+  	margin-bottom: 20px;
+  	padding: 0 15px;
+}
+.resenas form input[type="submit"]{
+  	width: 100%;
+  	padding: 15px;
+  	margin-top: 20px;
+  	background-color: #0ab3a3;
+  	border: 0;
+  	cursor: pointer;
+  	font-weight: bold;
+  	color: #ffffff;
+  	transition: background-color 0.2s;
+}
+.resenas form input[type="submit"]:hover{
+  	background-color: #006c62;
+  	transition: background-color 0.2s;
+}

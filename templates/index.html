@@ -6,7 +6,7 @@
     {% if session['logeado'] %}
     <p>Bienvenido, {{ cuenta }}!</p>
     {% else %}
-    <p>No estas logeado!</p>
+    <p>{{msg}}</p>
     {% endif %}
 
 {% endblock %}

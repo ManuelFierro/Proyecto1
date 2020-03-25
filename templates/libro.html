@@ -5,21 +5,47 @@
 {% block content %}
 <div class="perfil">
 
-    <h1>Los datos de tu cuenta son: </h1>
+    <h1>Los datos de {{libro}} son: </h1>
 
-        <div class="usuario">
-    		<a class="active">Usuario:  </a> {{ session['usuario'] }}
-    	</div>
-        <div class="usuario">
-    		<a class="active">Password:  </a> {{ session['password'] }}
-    	</div>
+    <div class="isbn">
+        <a class="active">isbn:  </a> {{ session['usuario'] }}
+    </div>
+    <div class="nombre">
+    		<a class="active">nombre:  </a> {{ session['usuario'] }}
+    </div>
+    <div class="ano">
+    		<a class="active">ano:  </a> {{ session['password'] }}
+    </div>
 
-        <div class="perfilR">
+    <div class="resena">
+                <h1>reseña</h1>
+                <form action="{{ url_for('resena') }}" method="post">
+
+                        <textarea rows = "3" cols = "40" type="text" name="resena" placeholder="Escribe aqui la reseña..." id="resena" required></textarea>
+                        <div class="msg">{{ msg }}</div>
+                        <input type="submit" value="Ingresar">
+                        <div class="rating">
+                                <input type="radio" id="star5" name="rating" value="5" />
+                                <label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rating" value="4"/>
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rating" value="3" />
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rating" value="2"/>
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rating" value="1"/>
+                                <label for="star1" title="text">1 star</label>
+                        </div>
+
+                </form>
+    </div>
+
+    <div class="perfilR">
 
             <h2>Actividad: </h2>
                 {% for resena in resenas %}
                 <div class="rev">
-        		<a class="active"> Tu reseña del libro {{resena.isbn}}: </a>
+        		<a class="active"> Reseñas de {{resena.isbn}}: </a>
         		</div>
 
                 <div class="estrella">
@@ -72,8 +98,7 @@
                 <div class="container">{{resena.resena}}</div>
             </div>
             {% endfor %}
-        </div>
+    </div>
 </div>
-
 
 {% endblock %}
