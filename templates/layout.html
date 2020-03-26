@@ -21,11 +21,11 @@
 		  </button></a>
 		  <!-- CATEGORIAS -->
 	  <!-- BOTON SEARCH -->
-	 <form class="mx-2 d-inline ">
+	 <form class="mx-2 d-inline" action="{{ url_for('busqueda') }}" method="post" autocomplete="off">
 		 <div class="input-group">
-			 <input type="text" class="form-control border border-right-0" placeholder="Buscar...">
+			 <input type="text" name="busqueda" class="form-control border border-right-0" placeholder="Buscar...">
 			 <span class="input-group-append">
-				 <button class="btn border-left-0 " type="button">
+				 <button  name="busqueda" class="btn border-left-0 " type="submit">
 					 <i class="fa fa-search"></i>
 				 </button>
 			 </span>
@@ -100,29 +100,29 @@
 
 				<li>
 					<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span><i class="fas fa-book-reader"></i> LIBROS</span> </a>
-					<ul style="color: white" class="collapse list-unstyled" id="pageSubmenu">
+					<ul style="color: white" class="collapse list-unstyled " id="pageSubmenu">
 						<li>
-							<a href="#">A B C D </a>
+							<a href="{{ url_for('sidebar', letras='ABCD') }}">A B C D</a>
 						</li>
 						<li>
-							<a href="#">E F G H</a>
+							<a href="{{ url_for('sidebar', letras='EFGH') }}">E F G H</a>
 						</li>
 						<li>
-							<a href="#">I J K L</a>
+							<a href="{{ url_for('sidebar', letras='IJKL') }}">I J K L</a>
 						</li>
 						<li>
-							<a href="#">M N O P</a>
+							<a href="{{ url_for('sidebar', letras='MNOP') }}">M N O P</a>
 						</li>
 						<li>
-							<a  href="#">Q R S T</a>
+							<a href="{{ url_for('sidebar', letras='QRST') }}">Q R S T</a>
 						</li>
 						<li >
-							<a href="#">U V W X Y Z</a>
+							<a href="{{ url_for('sidebar', letras='UVWXYZ') }}">U V W X Y Z</a>
 						</li>
 					</ul>
 				</li>
 				<li>
-					<a href="#">LIBROS</a>
+					<a href="#">BUSQUEDA</a>
 				</li>
 			</ul>
 
@@ -130,6 +130,8 @@
 		</nav>
 
 		<div id="contenido" class="color-block content">
+				<p>{{mensaje}}</p>
+				<p>{{error}}</p>
 
 				{% block content %}{% endblock %}
 

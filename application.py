@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.secret_key = "shit"
 
 motor = create_engine(
-    'postgres://tybnzuug:sEd-YLwtFP6juILFYUkAKmwTtHpoNasU@drona.db.elephantsql.com:5432/tybnzuug')
+    'postgres://tybnzuug:sEd-YLwtFP6juILFYUkAKmwTtHpoNasU@drona.db.elephantsql.com:5432/tybnzuug', pool_size=20, max_overflow=0)
 # 'mysql+mysqldb://waveinc:DANTE8888@waveinc.mysql.pythonanywhere-services.com:3306/waveinc$proyecto1')
 
 
@@ -39,7 +39,7 @@ def login():
         password = request.form['password']
         cuenta = db.execute('SELECT * FROM usuarios WHERE usuario= :usuario AND password= :password',
                             {"usuario": usuario, "password": password}).fetchone()
-
+        db.close()
         # si la cuenta existe en la base de datos y concuerda la pass
         if cuenta:
             # crea sesion con el nombre de usuario
@@ -66,6 +66,7 @@ def registro():
         password = request.form['password']
         account = db.execute("SELECT * FROM usuarios WHERE usuario= :usuario",
                              {"usuario": usuario}).fetchone()
+        db.close()
         # verifica si la cuenta existe, se agrega el mensaje acorde
         if account:
             mensaje = '¡Ya existe una cuenta con ese usuario!'
@@ -76,6 +77,7 @@ def registro():
             db.execute("INSERT INTO usuarios (usuario,password) VALUES (:usuario, :password)",
                        {"usuario": usuario, "password": password})
             db.commit()
+            db.close()
             mensaje = 'Se registro con exito!'
             return redirect(url_for('login'))
     elif request.method == 'POST':
@@ -105,8 +107,10 @@ def perfil():
     # verifica si esta activo el login
     if 'logeado' in session:
         cuenta = session['usuario']
-        resenas = db.execute("SELECT resena,isbn,rating FROM resenas WHERE usuario= :usuario",
+        resenas = db.execute("SELECT titulo,resena,rating FROM resenas INNER JOIN libros ON libros.isbn=resenas.isbn WHERE usuario= :usuario",
                              {"usuario": cuenta}).fetchall()
+
+        db.close()
         if request.args.get('mensaje'):
             mensaje = request.args['mensaje']
         else:
@@ -118,30 +122,91 @@ def perfil():
     return redirect(url_for('index', msg=msg))
 
 
-@app.route('/resena', methods=['GET', 'POST'])
-def resena():
+@app.route('/busqueda/', methods=['GET', 'POST'])
+def busqueda():
+    titulo = request.form['busqueda'] + '%'
+    #
+    # verifica si esta activo el login
+    if 'logeado' in session:
+        # resultado = db.execute("SELECT usuario FROM usuarios WHERE usuario LIKE :titulo", {"titulo": titulo}).fetchone()
+        resultado = db.execute(
+            "SELECT titulo,isbn,autor,year FROM libros WHERE titulo LIKE :titulo", {"titulo": titulo}).fetchall()
+        db.close()
+        if not resultado:
+            mensaje = 'Lo sentimos no tenemos ese libro'
+            return render_template('libros.html', mensaje=mensaje)
+        else:
+            mensaje = resultado
+            return render_template('libros.html', mensaje=mensaje, libros=resultado)
+    mensaje = 'Para usar esta funcion debes estar logeado'
+    # User is not loggedin redirect to login page
+    return redirect(url_for('index', mensaje=mensaje))
+
+
+@app.route("/libro/<string:isbn>", methods=['GET', 'POST'])
+def libro(isbn):
+
+    # verifica si esta activo el login
+    if 'logeado' in session:
+        # resultado = db.execute("SELECT usuario FROM usuarios WHERE usuario LIKE :titulo", {"titulo": titulo}).fetchone()
+        libro = db.execute("SELECT titulo,isbn,autor,year FROM libros WHERE isbn = :isbn", {
+            "isbn": isbn}).fetchone()
+        resenas = db.execute("SELECT usuario,resena,isbn,rating FROM resenas WHERE isbn= :isbn",
+                             {"isbn": isbn}).fetchall()
+        db.close()
+        mensaje = 'Informacion del libro:'
+        return render_template('libro.html', mensaje=mensaje, libro=libro, resenas=resenas)
+    mensaje = 'Para usar estar funcion debes estar logeado'
+    # User is not loggedin redirect to login page
+    return redirect(url_for('index', mensaje=mensaje))
+
+
+@app.route("/sidebar/<string:letras>", methods=['GET', 'POST'])
+def sidebar(letras):
+    titulo = list(letras)
+
+    # verifica si esta activo el login
+    if 'logeado' in session:
+        # resultado = db.execute("SELECT usuario FROM usuarios WHERE usuario LIKE :titulo", {"titulo": titulo}).fetchone()
+        resultadoA = db.execute("SELECT titulo,isbn,autor,year FROM libros WHERE titulo LIKE :letra ORDER BY titulo ASC", {
+                                "letra": titulo[0] + '%'}).fetchall()
+        resultadoB = db.execute("SELECT titulo,isbn,autor,year FROM libros WHERE titulo LIKE :letra ORDER BY titulo ASC", {
+                                "letra": titulo[1] + '%'}).fetchall()
+        resultadoC = db.execute("SELECT titulo,isbn,autor,year FROM libros WHERE titulo LIKE :letra ORDER BY titulo ASC", {
+                                "letra": titulo[2] + '%'}).fetchall()
+        resultadoD = db.execute("SELECT titulo,isbn,autor,year FROM libros WHERE titulo LIKE :letra ORDER BY titulo ASC", {
+                                "letra": titulo[3] + '%'}).fetchall()
+        db.close()
+        mensaje = 'Los libros encontrados son:'
+        return render_template('libros.html', mensaje=mensaje, libros1=resultadoA, titulo=titulo, libros2=resultadoB, libros3=resultadoC, libros4=resultadoD)
+    mensaje = 'Para entrar al perfil debes estar logeado'
+    # User is not loggedin redirect to login page
+    return redirect(url_for('index', mensaje=mensaje))
+
+
+@app.route('/resena/<string:ISBN>', methods=['GET', 'POST'])
+def resena(ISBN):
     # variable mensaje para mandar mensajes...
     mensaje = ''
-    cuenta = session['usuario']
 
+    cuenta = session['usuario']
+    libro = db.execute("SELECT titulo,isbn,autor,year FROM libros WHERE isbn = :isbn", {
+        "isbn": ISBN}).fetchone()
     # verifica si esta activo el login
     if request.method == 'POST' and 'resena' in request.form and 'rating' in request.form:
         resena = resena = request.form.get("resena")
         rating = request.form.get("rating")
-        db.execute("INSERT INTO resenas (usuario,isbn,resena,rating) VALUES (:usuario,1416949658, :resena, :rating)",
-                   {"resena": resena, "usuario": cuenta, "rating": rating})
+
+        db.execute("INSERT INTO resenas (usuario,isbn,resena,rating) VALUES (:usuario,:ISBN, :resena, :rating)",
+                   {"resena": resena, "ISBN": ISBN, "usuario": cuenta, "rating": rating})
         db.commit()
+        db.close()
         mensaje = 'Se agregó una nueva reseña'
         # muestra la informacion del usuario en el perfil.
-
         return redirect(url_for('perfil', mensaje=mensaje))
-
-    elif request.method == 'POST':
-        # si el formulario esta vacio muestre mensaje
-        msg = 'no se pudo enviar el mensaje'
-
-    # User is not loggedin redirect to login page
-    return redirect(url_for('perfil', msg=msg))
+    else:
+        error = "No se pudo enviar la reseña"
+        return render_template('libro.html', error=error, libro=libro)
 
 
 @app.route('/logout')

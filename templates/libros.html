@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row ">
+        <div class="libros col-sm">
+        <h1>{{ titulo[0]}}</h1>
+            <ul>
+                {% for libro in libros1 %}
+                <li>
+                    <a href="{{ url_for('libro', isbn = libro.isbn) }}">
+                    ISBN: {{ libro.isbn }}
+                    <br> Nombre: {{ libro.titulo }}
+                    <br> Autor: {{ libro.autor }}
+                    <br> Año: {{libro.year}}
+                </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="libros col-sm">
+        <h1>{{ titulo[1]}}</h1>
+        <ul>
+            {% for libro in libros2 %}
+            <li>
+                <a href="{{ url_for('libro', isbn = libro.isbn) }}">
+                ISBN: {{ libro.isbn }}
+                <br>Nombre: {{ libro.titulo }}
+                <br>Autor: {{ libro.autor }}
+                <br> Año: {{libro.year}}
+            </a>
+            </li>
+            {% endfor %}
+        </ul>
+        </div>
+        <div class="libros col">
+        <h1>{{ titulo[2]}}</h1>
+        <ul>
+            {% for libro in libros3 %}
+            <li>
+                <a href="{{ url_for('libro', isbn = libro.isbn) }}">
+                ISBN: {{ libro.isbn }}
+                <br> Nombre: {{ libro.titulo }}
+                <br> Autor: {{ libro.autor }}
+                <br> Año: {{libro.year}}
+            </a>
+            </li>
+            {% endfor %}
+        </ul>
+        </div>
+        <div class="libros col-sm">
+        <h1>{{ titulo[3]}}</h1>
+        <ul>
+            {% for libro in libros4 %}
+            <li>
+                <a href="{{ url_for('libro', isbn = libro.isbn) }}">
+                ISBN: {{ libro.isbn }}
+                <br> Nombre: {{ libro.titulo }}
+                <br> Autor: {{ libro.autor }}
+                <br> Año: {{libro.year}}
+            </a>
+            </li>
+            {% endfor %}
+        </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -8,10 +8,10 @@
     <h1>Los datos de tu cuenta son: </h1>
 
         <div class="usuario">
-    		<a class="active">Usuario:  </a> {{ session['usuario'] }}
+    		<a class="active">Usuario:  </a>  {{ session['usuario'] }}
     	</div>
         <div class="usuario">
-    		<a class="active">Password:  </a> {{ session['password'] }}
+    		<a class="active">Password:  </a>  {{ session['password'] }}
     	</div>
 
         <div class="perfilR">
@@ -19,7 +19,7 @@
             <h2>Actividad: </h2>
                 {% for resena in resenas %}
                 <div class="rev">
-        		<a class="active"> Tu reseña del libro {{resena.isbn}}: </a>
+        		<a class="active"> Tu reseña del libro {{resena.titulo}}: </a>
         		</div>
 
                 <div class="estrella">

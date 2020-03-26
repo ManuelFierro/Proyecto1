@@ -5,8 +5,9 @@
 {% block content %}
     {% if session['logeado'] %}
     <p>Bienvenido, {{ cuenta }}!</p>
+
     {% else %}
-    <p>{{msg}}</p>
+    <p>No estas logeado, para acceder a todas las caracteristias primero debes logearte</p>
     {% endif %}
 
 {% endblock %}

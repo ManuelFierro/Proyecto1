@@ -217,6 +217,7 @@ ul.CTAs a {
     margin-bottom: 5px;
 }
 
+
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -440,4 +441,16 @@ ul.CTAs a {
 .resenas form input[type="submit"]:hover{
   	background-color: #006c62;
   	transition: background-color 0.2s;
+}
+
+/* ---------------------------------------------------
+    LIBROS INFO
+----------------------------------------------------- */
+.libros {
+  	width: 100%;
+  	background-color: #ffffff;
+  	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+    margin-right: 160px;
+    margin-left: -150px;
+    padding-bottom: 5px;
 }
