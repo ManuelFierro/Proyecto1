@@ -1,6 +1,10 @@
 {% extends 'layout.html' %}
+{% block title %} Perfil {{ session['usuario'] }} {% endblock %}
+{% block head %}
+  {{ super() }}
+ <link rel="shortcut icon" href="/static/user.svg"/>
+{% endblock %}
 
-{% block title %}Perfil{% endblock %}
 
 {% block content %}
 <div class="perfil expand-sm">
@@ -19,7 +23,8 @@
             <h2>Actividad: </h2>
                 {% for resena in resenas %}
                 <div class="rev">
-        		<a class="active"> Tu reseña del libro:<br> {{resena.titulo}}: </a>
+                Tu reseña del libro: <br>
+        		<a href="{{ url_for('libro', isbn = resena.isbn) }}" class="active usuarios">{{resena.titulo}}: </a>
         		</div>
 
                 <div class="estrella">
@@ -70,6 +75,7 @@
                 </div>
                 {% endif %}
                 <div class="container">{{resena.resena}}</div>
+
             </div>
             {% endfor %}
         </div>

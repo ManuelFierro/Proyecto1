@@ -1,15 +1,10 @@
 {% extends 'layout.html' %}
 
-{% block title %}Libros {{titulo}} {% endblock %}
-
-{% block head %}
-  {{ super() }}
- <link rel="shortcut icon" href="/static/books1.svg"/>
-{% endblock %}
+{% block title %}Perfil{% endblock %}
 
 {% block content %}
 
-{% if titulo == "" %}
+{% if titulo != "no" %}
 
         <div class="libros col-sm">
         <h1></h1>
@@ -26,7 +21,7 @@
                 {% endfor %}
             </ul>
         </div>
-{% else %}
+{% else: %}
 <div class="container">
     <div class="row ">
         <div class="libros col-sm">

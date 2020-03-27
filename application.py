@@ -109,7 +109,7 @@ def perfil():
     # verifica si esta activo el login
     if 'logeado' in session:
         cuenta = session['usuario']
-        resenas = db.execute("SELECT titulo,resena,rating FROM resenas INNER JOIN libros ON libros.isbn=resenas.isbn WHERE usuario= :usuario",
+        resenas = db.execute("SELECT * FROM resenas INNER JOIN libros ON libros.isbn=resenas.isbn WHERE usuario= :usuario",
                              {"usuario": cuenta}).fetchall()
 
         db.close()
@@ -126,23 +126,28 @@ def perfil():
 
 @app.route('/busqueda/', methods=['GET', 'POST'])
 def busqueda():
-    titulo = request.form['busqueda'] + '%'
-    #
-    # verifica si esta activo el login
-    if 'logeado' in session:
-        # resultado = db.execute("SELECT usuario FROM usuarios WHERE usuario LIKE :titulo", {"titulo": titulo}).fetchone()
-        resultado = db.execute(
-            "SELECT titulo,isbn,autor,year FROM libros WHERE titulo LIKE :titulo", {"titulo": titulo}).fetchall()
-        db.close()
-        if not resultado:
-            mensaje = 'Lo sentimos no tenemos ese libro'
-            return render_template('libros.html', mensaje=mensaje)
-        else:
-            mensaje = resultado
-            return render_template('libros.html', mensaje=mensaje, libros=resultado)
-    mensaje = 'Para usar esta funcion debes estar logeado'
-    # User is not loggedin redirect to login page
-    return redirect(url_for('index', mensaje=mensaje))
+    busqueda = request.form['busqueda']
+    titulo = ""
+    mensaje = ""
+
+    resultado = db.execute("SELECT * FROM libros WHERE isbn like :busqueda OR titulo like :busqueda OR autor like :busqueda", {
+        "busqueda": "%"+busqueda.strip()+"%"}).fetchall()
+    if(not resultado):
+        resultado = db.execute("SELECT * FROM libros WHERE isbn like :busqueda OR titulo like :busqueda OR autor like :busqueda", {
+            "busqueda": "%"+busqueda.capitalize().strip()+"%"}).fetchall()
+        if(not resultado):
+            resultado = db.execute("SELECT * FROM libros WHERE isbn like :busqueda OR titulo like :busqueda OR autor like :busqueda", {
+                "busqueda": "%"+busqueda.upper().strip()+"%"}).fetchall()
+            if(not resultado):
+                resultado = db.execute("SELECT * FROM libros WHERE isbn like :busqueda OR titulo like :busqueda OR autor like :busqueda", {
+                    "busqueda": "%"+busqueda.lower().strip()+"%"}).fetchall()
+                db.close()
+                if (not resultado):
+                    mensaje = 'Lo sentimos no tenemos ese libro'
+                return render_template('libros.html', mensaje=mensaje, titulo=titulo, libros=resultado)
+
+    mensaje = "Estas son las concidencias de: "+busqueda
+    return render_template('libros.html', mensaje=mensaje, libros=resultado, titulo=titulo)
 
 
 @app.route("/libro/<string:isbn>", methods=['GET', 'POST'])

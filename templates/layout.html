@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		{% block head %}
 		<meta charset="utf-8">
 
 		<title>{% block title %}{% endblock %}</title>
 		<link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
 		<link rel="stylesheet" href="{{ url_for('static', filename='all.css') }}">
+		<link rel="shortcut icon" href="/static/books.svg"/>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-
+		{% endblock %}
 	</head>
 <body>
 

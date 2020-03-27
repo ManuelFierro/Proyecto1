@@ -3,6 +3,7 @@
 {% block title %}Pagina principal{% endblock %}
 
 {% block content %}
+{{error}}
     {% if session['logeado'] %}
     <p>Bienvenido, {{ cuenta }}!</p>
 
@@ -10,5 +11,39 @@
     {{ mensaje }}
     <p>{{ mensaje }}No estas logeado, para acceder a todas las caracteristias primero debes logearte</p>
     {% endif %}
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <a href="{{ url_for('sidebar', letras='ABCD') }}"><img class="d-block w-100" src="/static/img1.jpg" alt="Los Angeles" height="600"></a>
+      <div class="carousel-caption">
+        <h3>A B C D</h3>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <a href="{{ url_for('sidebar', letras='EFGH') }}"><img class="d-block w-100" src="/static/img2.jpg" alt="Chicago"  height="600"></a>
+      <div class="carousel-caption">
+        <h3>E F G H</h3>
+      </div>
+    </div>
+    <div  class="carousel-item">
+      <a href="{{ url_for('sidebar', letras='IJKL') }}"><img class="d-block w-100" src="/static/img3.gif" alt="New York"  height="600"></a>
+      <div class="carousel-caption">
+        <h1>I J K L</h1>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
 
 {% endblock %}

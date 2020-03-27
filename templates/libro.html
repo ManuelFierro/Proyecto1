@@ -1,6 +1,11 @@
 {% extends 'layout.html' %}
 
-{% block title %}Perfil{% endblock %}
+{% block title %}{{libro.titulo}}{% endblock %}
+
+{% block head %}
+  {{ super() }}
+ <link rel="shortcut icon" href="/static/open-book.svg"/>
+{% endblock %}
 
 {% block content %}
 <div class="perfil col-8">
