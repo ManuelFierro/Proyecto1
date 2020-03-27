@@ -7,7 +7,8 @@
     <p>Bienvenido, {{ cuenta }}!</p>
 
     {% else %}
-    <p>No estas logeado, para acceder a todas las caracteristias primero debes logearte</p>
+    {{ mensaje }}
+    <p>{{ mensaje }}No estas logeado, para acceder a todas las caracteristias primero debes logearte</p>
     {% endif %}
 
 {% endblock %}

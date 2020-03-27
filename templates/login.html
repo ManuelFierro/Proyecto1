@@ -20,7 +20,12 @@
 				<i class="fas fa-lock"></i>
 			</label>
 			<input type="password" name="password" placeholder="Password" id="password" required>
-			<div class="msg">{{ mensaje }}</div>
+			{% if mensajeexito %}
+			<div class="alert alert-success">{{ mensajeexito }}</div>
+			{% endif %}
+			{% if sessionerror %}
+			<div class="alert alert-danger">{{ sesionerror }}</div>
+			{% endif %}
 			<input type="submit" value="Ingresar">
 		</form>
 </div>

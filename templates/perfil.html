@@ -3,7 +3,7 @@
 {% block title %}Perfil{% endblock %}
 
 {% block content %}
-<div class="perfil">
+<div class="perfil expand-sm">
 
     <h1>Los datos de tu cuenta son: </h1>
 
@@ -14,12 +14,12 @@
     		<a class="active">Password:  </a>  {{ session['password'] }}
     	</div>
 
-        <div class="perfilR">
+        <div class="perfilR ">
 
             <h2>Actividad: </h2>
                 {% for resena in resenas %}
                 <div class="rev">
-        		<a class="active"> Tu reseña del libro {{resena.titulo}}: </a>
+        		<a class="active"> Tu reseña del libro:<br> {{resena.titulo}}: </a>
         		</div>
 
                 <div class="estrella">

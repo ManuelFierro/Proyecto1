@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="login">
-	
+
 		<h1>Registro</h1>
 		<div class="links">
 			<a href="{{ url_for('login') }}" >Ingresar</a>
@@ -20,7 +20,13 @@
 				<i class="fas fa-lock"></i>
 			</label>
 			<input type="password" name="password" placeholder="Password" id="password" required>
-			<div class="msg">{{ mensaje }}</div>
+			{% if mensajeexito %}
+			<div class="alert alert-success">{{ mensajeexito }}</div>
+			{% endif %}
+			{% if sessionerror %}
+			<div class="alert alert-danger">{{ sesionerror }}</div>
+			{% endif %}
+			<div class="alert alert-danger">{{ cuentaex }}</div>
 			<input type="submit" value="registro">
 		</form>
 </div>

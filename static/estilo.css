@@ -279,6 +279,7 @@ ul.CTAs a {
     cursor:pointer;
     font-size:30px;
     color:#ccc;
+
 }
 .rating:not(:checked) > label:before {
     content: '★ ';
@@ -408,6 +409,12 @@ ul.CTAs a {
 }
 
 
+.textarea{
+    border: 1px solid #888;
+    outline: none;
+    resize: none;
+}
+
 /* ---------------------------------------------------
     RESEÑAS
 ----------------------------------------------------- */
@@ -450,7 +457,7 @@ ul.CTAs a {
   	width: 100%;
   	background-color: #ffffff;
   	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
-    margin-right: 160px;
-    margin-left: -150px;
+    margin-right: 10px;
+
     padding-bottom: 5px;
 }

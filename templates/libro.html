@@ -3,8 +3,7 @@
 {% block title %}Perfil{% endblock %}
 
 {% block content %}
-<h1>{{mensaje}}</h1>
-<div class="perfil">
+<div class="perfil col-8">
 
     <h1>Los datos de {{libro.titulo}} son:</h1>
 
@@ -21,37 +20,49 @@
     	<a class="active">Año: </a> {{ libro.year }}
     </div>
 
-    <div class="perfil">
+    <div class="perfil col-11">
                 <h1>Reseña</h1>
 
                 <form action="{{ url_for('resena', ISBN=libro.isbn) }}" method="post">
-                        <textarea rows = "3" cols = "40" type="text" name="resena" placeholder="Escribe aqui la reseña..." id="resena" required></textarea>
-                        <div class="msg">{{ msg }}</div>
-                        <input type="submit" value="Ingresar">
-                        <div class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" />
-                                <label for="star5" title="text">5 stars</label>
-                                <input type="radio" id="star4" name="rating" value="4"/>
-                                <label for="star4" title="text">4 stars</label>
-                                <input type="radio" id="star3" name="rating" value="3" />
-                                <label for="star3" title="text">3 stars</label>
-                                <input type="radio" id="star2" name="rating" value="2"/>
-                                <label for="star2" title="text">2 stars</label>
-                                <input type="radio" id="star1" name="rating" value="1"/>
-                                <label for="star1" title="text">1 star</label>
-                        </div>
+
+                    <div class=" rating">
+
+                            <input type="radio" id="star5" name="rating" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="rating" value="4"/>
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="rating" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="rating" value="2"/>
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="rating" value="1"/>
+                            <label for="star1" title="text">1 star</label>
+                    </div>
+                    <div class="">
+                        <textarea  class="textarea" rows = "3" cols = "40" type="text" name="resena" placeholder="Escribe aqui la reseña..." id="resena" required></textarea>
+                        {% if reexito %}
+                        <div class="alert alert-success">{{ reexito }}</div>
+                        {% endif %}
+            			{% if errorlog %}
+                        <div class="alert alert-danger">{{ errorlog }}</div>
+                        {% endif %}
+                    </div>
+                    <input class="btn"type="submit" value="Ingresar">
+
+
+
                 </form>
     </div>
 
 
 </div>
 
-<div class="perfil">
+<div class="perfil col-8">
 
         <h1>RESEÑAS: </h1>
             {% for resena in resenas %}
             <div class="rev">
-            <a class="active"> Reseña de {{resena.usuario}}: </a>
+            <a class=" usuario active"> Reseña de {{resena.usuario}}: </a>
             </div>
 
             <div class="estrella">
