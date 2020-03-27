@@ -10,14 +10,16 @@
 <div class="perfil expand-sm">
 
     <h1>Los datos de tu cuenta son: </h1>
-
+        <!-- Informacion general del usuario .... -->
         <div class="usuario">
     		<a class="active">Usuario:  </a>  {{ session['usuario'] }}
     	</div>
         <div class="usuario">
     		<a class="active">Password:  </a>  {{ session['password'] }}
     	</div>
+        <!-- Informacion general del usuario .... -->
 
+        <!-- Informacion de las reseñas del usuario .... -->
         <div class="perfilR ">
 
             <h2>Actividad: </h2>
@@ -79,7 +81,7 @@
             </div>
             {% endfor %}
         </div>
+        <!-- Informacion de las reseñas del usuario .... -->
 </div>
-
 
 {% endblock %}

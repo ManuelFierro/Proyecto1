@@ -14,15 +14,15 @@
 		{% endblock %}
 	</head>
 <body>
-
+	<!-- BARRA DE NAVEGACION) -->
 	<nav class="navbar navbar-expand-lg  navbar-dark ">
 		<!-- CATEGORIAS -->
-		  <a class="navbar-brand"><button type="button" id="barraCollapse" class="btn ml-auto">
-			  <i class="fa fa-book"></i>
-			  <span>Categorias</span>
-		  </button></a>
-		  <!-- CATEGORIAS -->
-	  <!-- BOTON SEARCH -->
+		 <a class="navbar-brand"><button type="button" id="barraCollapse" class="btn ml-auto">
+			 <i class="fa fa-book"></i>
+			 <span>Categorias</span>
+		 </button></a>
+		 <!-- CATEGORIAS -->
+	 <!-- BOTON SEARCH -->
 	 <form class="mx-2 d-inline" action="{{ url_for('busqueda') }}" method="post" autocomplete="off">
 		 <div class="input-group">
 			 <input type="text" name="busqueda" class="form-control border border-right-0" placeholder="Buscar...">
@@ -33,12 +33,14 @@
 			 </span>
 		 </div>
 	 </form>
-	  <!-- BOTON SEARCH -->
+	 <!-- BOTON SEARCH -->
+
 		<!-- BOTON COLAPSABLE -->
 	    <button class="navbar-toggler  ml-auto mr-1" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
 	        <span class="navbar-toggler-icon"></span>
 	    </button>
 		<!-- BOTON COLAPSABLE -->
+
 		 <!-- MENU BARRANAV -->
 	    <div   class="collapse navbar-collapse flex-grow-0 "  id="navbarSupportedContent">
 			<ul class="navbar-nav text-right">
@@ -48,17 +50,6 @@
 			<li class="nav-item">
 				<a class="fa-lg nav-link " href="{{ url_for('perfil') }}"><span><i class="fas fa-user"></i> Perfil</span> </a>
 			</li>
-			 <!-- CATEGORIAS <li class="nav-item dropdown">
-			  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Dropdown
-			  </a>
-			  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="#">Action</a>
-				<a class="dropdown-item" href="#">Another action</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">Something else here</a>
-			  </div>
-			</li>-->
 			<li class="nav-item">
 				{% if session['logeado'] %}
 			   <a class="fa-lg nav-link" href="{{ url_for('logout') }}"><span><i class="fas fa-sign-out-alt"></i> Logout</span> </a>
@@ -69,20 +60,19 @@
 		  </ul>
 	    </div>
 	 <!-- MENU BARRANAV -->
-
+	</nav>
 	<!-- BARRA DE NAVEGACION) -->
 
-	</nav>
 
 	<div class="wrapper">
-		<!-- Sidebar  -->
+		<!-- barra o sidebar  -->
 		<nav class="" id="barralat">
 
 			<div class="sidebar-header">
             <h3>Biblio
 				TEK</h3>
         </div>
-
+			<!-- primer listado de la barra perfil login o logout -->
 			<ul class="list-unstyled components">
 				<li class="active">
 					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> <span><i class="fas fa-user"></i> MENU PRINCIPAL</span> </a>
@@ -99,47 +89,54 @@
 						</li>
 					</ul>
 				</li>
-
+				<!-- primer listado de la barra perfil login o logout -->
+				<!-- submenu categorias A B C .... -->
 				<li>
 					<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span><i class="fas fa-book-reader"></i> LIBROS</span> </a>
 					<ul style="color: white" class="collapse list-unstyled " id="pageSubmenu">
 						<li>
-							<a href="{{ url_for('sidebar', letras='ABCD') }}">A B C</a>
+							<a href="{{ url_for('sidebar', letras='ABC') }}">A B C</a>
 						</li>
 						<li>
-							<a href="{{ url_for('sidebar', letras='EFGH') }}">D E F</a>
+							<a href="{{ url_for('sidebar', letras='DEF') }}">D E F</a>
 						</li>
 						<li>
-							<a href="{{ url_for('sidebar', letras='IJKL') }}">G H I</a>
+							<a href="{{ url_for('sidebar', letras='GHI') }}">G H I</a>
 						</li>
 						<li>
-							<a href="{{ url_for('sidebar', letras='MNOP') }}">J K L </a>
+							<a href="{{ url_for('sidebar', letras='JKL') }}">J K L</a>
 						</li>
 						<li>
-							<a href="{{ url_for('sidebar', letras='QRST') }}">M N O </a>
+							<a href="{{ url_for('sidebar', letras='MNO') }}">M N O</a>
 						</li>
 						<li >
-							<a href="{{ url_for('sidebar', letras='UVWXYZ') }}">P Q R </a>
+							<a href="{{ url_for('sidebar', letras='PQR') }}">P Q R</a>
 						</li>
 						<li >
-							<a href="{{ url_for('sidebar', letras='UVWXYZ') }}">S T U </a>
+							<a href="{{ url_for('sidebar', letras='STU') }}">S T U</a>
 						</li>
 						<li >
-							<a href="{{ url_for('sidebar', letras='UVWXYZ') }}">V W X </a>
+							<a href="{{ url_for('sidebar', letras='VWX') }}">V W X</a>
 						</li>
 						<li >
-							<a href="{{ url_for('sidebar', letras='UVWXYZ') }}">Y Z</a>
+							<a href="{{ url_for('sidebar', letras='YZÑ') }}">Y Z Ñ</a>
 						</li>
 					</ul>
 				</li>
+				<!-- submenu categorias A B C .... -->
+
+				<!-- submenu busqueda-->
 				<li>
 					<a href="#">BUSQUEDA</a>
 				</li>
+				<!-- submenu busqueda-->
 			</ul>
 
 
 		</nav>
+		<!-- barra o sidebar  -->
 
+		<!-- aqui se muestra el contenido -->
 		<div id="contenido" class="color-block content">
 				<p>{{mensaje}}</p>
 				<p>{{error}}</p>
@@ -147,7 +144,68 @@
 				{% block content %}{% endblock %}
 
 		</div>
+		<!-- aqui se muestra el contenido -->
 	</div>
+
+
+<!-- FOOTER MDB MODIFICADO PARA PROYECTO1 -->
+<footer class="page-footer font-small blue-grey lighten-5">
+
+  <div style="background-color: #0ab3a3;">
+    <div class="container">
+
+      <!-- bARRA SUPERIOR-->
+      <div class="row py-4 d-flex align-items-center">
+
+        <!-- ENCABEZADO -->
+        <div style="color: white;"class="col-md-6 col-lg-5 text-center text-md-left mb-3 mb-md-0">
+          <h6 class="mb-0">INSTITUTO TECNOLOGICO SUPERIOR DE LERDO</h6>
+        </div>
+        <!-- ENCABEZADO -->
+
+      </div>
+      <!-- BARRA SUPERIOR-->
+
+    </div>
+  </div>
+
+  <!-- Contenido footer -->
+  <div class="container text-center text-md-left mt-3">
+    <!-- contenedor -->
+    <div class="row dark-grey-text">
+      <!-- columna -->
+      <div class="col-md-3 col-lg-4 col-xl-4">
+        <!-- acerca del proyecto -->
+        <h6 class="text-uppercase font-weight-bold">ACERCA</h6>
+        <hr class="teal accent-3  mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>Blibioteca, desarrollada por Manuel Fierro Cantú, para la materia Desarrollo de aplicaciones WEB,
+		,Cuenta con un sistema de perfiles, buscar libros y hacer reseñas sobre los mismos, dessarrollado en phyton.</p>
+
+      </div>
+      <!-- columna -->
+      <!-- columna -->
+      <div class="col-md-4 col-lg-3 col-xl-4 mx-auto mb-md-0 ">
+        <!-- info -->
+        <h6 class="text-uppercase font-weight-bold">CREADOR</h6>
+        <hr class="teal accent-3 mt-0 d-inline-block mx-auto" style="width: 80px;">
+        <p><i class="fas fa-user mr-3"></i> Manuel Alejandro Fierro Cantu</p>
+		<p><i class="fas fa-list-ol mr-3"></i> 17231A26</p>
+        <p><i class="fas fa-graduation-cap mr-3"></i>Ing Informática</p>
+        <p><i class="fas fa-chalkboard-teacher mr-3"></i> Desarrolo Web</p>
+      </div>
+      <!-- columna -->
+    </div>
+    <!-- contenedor -->
+  </div>
+  <!-- Contenido footer -->
+
+  <!--  pie de pagina -->
+  <div class="footer-copyright text-center text-black-50 py-3">© 2020 Copyright: Manuel Fierro Cantú
+  </div>
+  <!-- pie de pagina -->
+
+</footer>
+<!-- FOOTER MDB MODIFICADO PARA PROYECTO1 -->
 
 		<!-- jQuery CDN - Slim version (=without AJAX) -->
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -157,7 +215,7 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 		<!-- jQuery Custom Scroller CDN -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
+		<!-- script para la barra -->
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("#barralat").mCustomScrollbar({
@@ -171,5 +229,6 @@
 				});
 			});
 		</script>
+		<!-- script para la barra -->
 </body>
 </html>

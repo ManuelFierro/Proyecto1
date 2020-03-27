@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class="perfil col-8">
-
+    <!-- Informacion general del libro .... -->
     <h1>Los datos de {{libro.titulo}} son:</h1>
 
     <div class="usuario">
@@ -24,7 +24,9 @@
     <div class="usuario">
     	<a class="active">Año: </a> {{ libro.year }}
     </div>
-
+    <!-- Informacion general del libro .... -->
+    
+    <!-- formulario para hacer una reseña .... -->
     <div class="perfil col-11">
                 <h1>Reseña</h1>
 
@@ -43,6 +45,7 @@
                             <input type="radio" id="star1" name="rating" value="1"/>
                             <label for="star1" title="text">1 star</label>
                     </div>
+
                     <div class="">
                         <textarea  class="textarea" rows = "3" cols = "40" type="text" name="resena" placeholder="Escribe aqui la reseña..." id="resena" required></textarea>
                         {% if reexito %}
@@ -54,14 +57,12 @@
                     </div>
                     <input class="btn"type="submit" value="Ingresar">
 
-
-
                 </form>
     </div>
-
-
+    <!-- formulario para hacer una reseña .... -->
 </div>
 
+<!-- Reseñas del libro .... -->
 <div class="perfil col-8">
 
         <h1>RESEÑAS: </h1>
@@ -121,5 +122,6 @@
         </div>
         {% endfor %}
 </div>
+<!-- Reseñas del libro .... -->
 
 {% endblock %}

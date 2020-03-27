@@ -17,6 +17,7 @@ db = scoped_session(sessionmaker(bind=motor))
 
 @app.route("/", methods=["GET"])
 def index():
+    # argumentos para cambiar el valor del mensaje
     if request.args.get('msg'):
         msg = request.args['msg']
     else:
@@ -91,14 +92,11 @@ def registro():
 
 @app.route('/home')
 def home():
-
     # comprueba si esta activo el login
     if 'logeado' in session:
         cuenta = session['usuario']
-
         # si el usuario esta logeado abrir pagina principal o home
         return render_template('index.html', cuenta=cuenta)
-
     # si no lo esta redireccionar al login
     return redirect(url_for('login'))
 
@@ -111,7 +109,6 @@ def perfil():
         cuenta = session['usuario']
         resenas = db.execute("SELECT * FROM resenas INNER JOIN libros ON libros.isbn=resenas.isbn WHERE usuario= :usuario",
                              {"usuario": cuenta}).fetchall()
-
         db.close()
         if request.args.get('mensaje'):
             mensaje = request.args['mensaje']
@@ -120,7 +117,7 @@ def perfil():
         # muestra la informacion del usuario en el perfil.
         return render_template('perfil.html', resenas=resenas, mensaje=mensaje)
     msg = 'Para entrar al perfil debes estar logeado'
-    # User is not loggedin redirect to login page
+    # si no lo esta manda al index con un mensaje
     return redirect(url_for('index', msg=msg))
 
 
@@ -129,7 +126,7 @@ def busqueda():
     busqueda = request.form['busqueda']
     titulo = ""
     mensaje = ""
-
+    # query en if anidados para checar los posbiles libros que coincidan
     resultado = db.execute("SELECT * FROM libros WHERE isbn like :busqueda OR titulo like :busqueda OR autor like :busqueda", {
         "busqueda": "%"+busqueda.strip()+"%"}).fetchall()
     if(not resultado):
@@ -152,7 +149,7 @@ def busqueda():
 
 @app.route("/libro/<string:isbn>", methods=['GET', 'POST'])
 def libro(isbn):
-
+    # query de un libro en especifico, manejando variables desde html con el isbn
     libro = db.execute("SELECT titulo,isbn,autor,year FROM libros WHERE isbn = :isbn", {
         "isbn": isbn}).fetchone()
     resenas = db.execute("SELECT usuario,resena,isbn,rating FROM resenas WHERE isbn= :isbn",
@@ -165,18 +162,16 @@ def libro(isbn):
 @app.route("/sidebar/<string:letras>", methods=['GET', 'POST'])
 def sidebar(letras):
     titulo = list(letras)
-
+    # query de todos los libros que comiencen con una letra especifica, divida en 3
     resultadoA = db.execute("SELECT titulo,isbn,autor,year FROM libros WHERE titulo LIKE :letra ORDER BY titulo ASC", {
         "letra": titulo[0] + '%'}).fetchall()
     resultadoB = db.execute("SELECT titulo,isbn,autor,year FROM libros WHERE titulo LIKE :letra ORDER BY titulo ASC", {
         "letra": titulo[1] + '%'}).fetchall()
     resultadoC = db.execute("SELECT titulo,isbn,autor,year FROM libros WHERE titulo LIKE :letra ORDER BY titulo ASC", {
         "letra": titulo[2] + '%'}).fetchall()
-    resultadoD = db.execute("SELECT titulo,isbn,autor,year FROM libros WHERE titulo LIKE :letra ORDER BY titulo ASC", {
-        "letra": titulo[3] + '%'}).fetchall()
     db.close()
     mensaje = 'Los libros encontrados son:'
-    return render_template('libros.html', mensaje=mensaje, libros1=resultadoA, titulo=titulo, libros2=resultadoB, libros3=resultadoC, libros4=resultadoD)
+    return render_template('libros.html', mensaje=mensaje, libros1=resultadoA, titulo=titulo, libros2=resultadoB, libros3=resultadoC)
 
 
 @app.route('/resena/<string:ISBN>', methods=['GET', 'POST'])
@@ -190,7 +185,6 @@ def resena(ISBN):
                          {"isbn": ISBN}).fetchall()
     if 'logeado' in session:
         cuenta = session['usuario']
-
         # verifica si esta activo el login
         if request.method == 'POST' and 'resena' in request.form and 'rating' in request.form:
             resena = resena = request.form.get("resena")
@@ -203,7 +197,6 @@ def resena(ISBN):
             reexito = 'Se agregó una nueva reseña'
             # muestra la informacion del usuario en el perfil.
             return render_template('libro.html', reexito=reexito, resenas=resenas, libro=libro)
-            # return render_template('libro.html', reexito=reexito, libro=libro)
         else:
             errorlog = "No se pudo enviar la reseña"
             return render_template('libro.html', errorlog=errorlog, libro=libro, resenas=resenas)
@@ -217,7 +210,6 @@ def logout():
     session.pop('logeado', None)
     session.pop('usuario', None)
     session.pop('password', None)
-
     # redirecciona al login
     return redirect(url_for('index'))
 

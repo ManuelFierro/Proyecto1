@@ -1,9 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block title %}Pagina principal{% endblock %}
-
+ <!-- contenido-mensajes  -->
 {% block content %}
-{{error}}
+    {{error}}
     {% if session['logeado'] %}
     <p>Bienvenido, {{ cuenta }}!</p>
 
@@ -11,57 +11,97 @@
     {{ mensaje }}
     <p>{{ mensaje }}No estas logeado, para acceder a todas las caracteristias primero debes logearte</p>
     {% endif %}
-
+    <!-- contenido-mensajes  -->
+<!-- carrusel usando bootstrap -->
 <div id="demo" class="carousel slide" data-ride="carousel">
   <ul class="carousel-indicators">
     <li data-target="#demo" data-slide-to="0" class="active"></li>
     <li data-target="#demo" data-slide-to="1"></li>
     <li data-target="#demo" data-slide-to="2"></li>
+    <li data-target="#demo" data-slide-to="3"></li>
+    <li data-target="#demo" data-slide-to="4"></li>
+    <li data-target="#demo" data-slide-to="5"></li>
+    <li data-target="#demo" data-slide-to="6"></li>
+    <li data-target="#demo" data-slide-to="7"></li>
+    <li data-target="#demo" data-slide-to="8"></li>
+
   </ul>
+  <!-- slides de letras  -->
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <a href="{{ url_for('sidebar', letras='ABCD') }}"><img class="d-block w-100" src="/static/img1.jpg" alt="Los Angeles" height="600"></a>
+      <a href="{{ url_for('sidebar', letras='ABC') }}"><img class="d-block w-100" src="/static/img1.jpg"  height="600"></a>
       <div class="carousel-caption">
-        <h3>A B C D</h3>
+        <h1>A B C</h1>
       </div>
     </div>
+
     <div class="carousel-item">
-      <a href="{{ url_for('sidebar', letras='EFGH') }}"><img class="d-block w-100" src="/static/img2.jpg" alt="Chicago"  height="600"></a>
+      <a href="{{ url_for('sidebar', letras='DEF') }}"><img class="d-block w-100" src="/static/img2.jpg" height="600"></a>
       <div class="carousel-caption">
-        <h3>E F G H</h3>
+        <h1>D E F</h1>
       </div>
     </div>
+
     <div  class="carousel-item">
-      <a href="{{ url_for('sidebar', letras='IJKL') }}"><img class="d-block w-100" src="/static/img3.gif" alt="New York"  height="600"></a>
+      <a href="{{ url_for('sidebar', letras='GHI') }}"><img class="d-block w-100" src="/static/img3.gif" height="600"></a>
       <div class="carousel-caption">
-        <h1>I J K L</h1>
+        <h1>G H I</h1>
       </div>
     </div>
+
     <div  class="carousel-item">
-      <a href="{{ url_for('sidebar', letras='IJKL') }}"><img class="d-block w-100" src="/static/img3.gif" alt="New York"  height="600"></a>
+      <a href="{{ url_for('sidebar', letras='JKL') }}"><img class="d-block w-100" src="/static/img3.gif" height="600"></a>
       <div class="carousel-caption">
-        <h1>M N O P</h1>
+        <h1>J K L</h1>
       </div>
     </div>
+
     <div  class="carousel-item">
-      <a href="{{ url_for('sidebar', letras='IJKL') }}"><img class="d-block w-100" src="/static/img3.gif" alt="New York"  height="600"></a>
+      <a href="{{ url_for('sidebar', letras='MNO') }}"><img class="d-block w-100" src="/static/img3.gif" height="600"></a>
       <div class="carousel-caption">
-        <h1>Q R S T</h1>
+        <h1>M N O</h1>
       </div>
     </div>
+
     <div  class="carousel-item">
-      <a href="{{ url_for('sidebar', letras='IJKL') }}"><img class="d-block w-100" src="/static/img3.gif" alt="New York"  height="600"></a>
+      <a href="{{ url_for('sidebar', letras='PQR') }}"><img class="d-block w-100" src="/static/img3.gif" height="600"></a>
       <div class="carousel-caption">
-        <h1>U V W X Y Z</h1>
+        <h1>P Q R</h1>
+      </div>
+    </div>
+
+    <div  class="carousel-item">
+      <a href="{{ url_for('sidebar', letras='STU') }}"><img class="d-block w-100" src="/static/img3.gif" height="600"></a>
+      <div class="carousel-caption">
+        <h1>S T U</h1>
+      </div>
+    </div>
+
+    <div  class="carousel-item">
+      <a href="{{ url_for('sidebar', letras='VWX') }}"><img class="d-block w-100" src="/static/img3.gif"  height="600"></a>
+      <div class="carousel-caption">
+        <h1>V W X</h1>
+      </div>
+    </div>
+
+    <div  class="carousel-item">
+      <a href="{{ url_for('sidebar', letras='YZÑ') }}"><img class="d-block w-100" src="/static/img3.gif" height="600"></a>
+      <div class="carousel-caption">
+        <h1>Y Z Ñ</h1>
       </div>
     </div>
   </div>
+  <!-- slides de letras  -->
+
+  <!-- controles del slide  -->
   <a class="carousel-control-prev" href="#demo" data-slide="prev">
     <span class="carousel-control-prev-icon"></span>
   </a>
   <a class="carousel-control-next" href="#demo" data-slide="next">
     <span class="carousel-control-next-icon"></span>
   </a>
+    <!-- controles del slide  -->
 </div>
+<!-- carrusel usando bootstrap -->
 
 {% endblock %}

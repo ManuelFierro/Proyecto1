@@ -1,7 +1,6 @@
 /*
-    DEMO STYLE
+    GENERAL
 */
-
 
 body {
     background: black;
@@ -125,7 +124,7 @@ button:hover {
 }
 
 /* ---------------------------------------------------
-    SIDEBAR STYLE
+    SIDEBAR
 ----------------------------------------------------- */
 
 .wrapper {
@@ -219,7 +218,7 @@ ul.CTAs a {
 
 
 /* ---------------------------------------------------
-    CONTENT STYLE
+    CONTENIDO
 ----------------------------------------------------- */
 
 #contenido {
@@ -237,7 +236,7 @@ ul.CTAs a {
 }
 
 /* ---------------------------------------------------
-    MEDIAQUERIES
+    QUERIES PARA LA SIDEBAR
 ----------------------------------------------------- */
 
 @media (max-width: 768px) {
@@ -333,14 +332,11 @@ ul.CTAs a {
   	color: #0ab3a3;
 }
 
-
-
 @media (max-width: 800px) {
   #perfil{
-    width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+    width: 100%;
   }
 }
-
 
 /* ---------------------------------------------------
     Datos de la cuenta RESEÑAS
@@ -458,6 +454,5 @@ ul.CTAs a {
   	background-color: #ffffff;
   	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
     margin-right: 10px;
-
     padding-bottom: 5px;
 }
