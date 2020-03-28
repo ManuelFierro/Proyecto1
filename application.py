@@ -197,6 +197,7 @@ def resena(ISBN):
             reexito = 'Se agregó una nueva reseña'
             # muestra la informacion del usuario en el perfil.
             return render_template('libro.html', reexito=reexito, resenas=resenas, libro=libro)
+            # return render_template('libro.html', reexito=reexito, libro=libro)
         else:
             errorlog = "No se pudo enviar la reseña"
             return render_template('libro.html', errorlog=errorlog, libro=libro, resenas=resenas)
@@ -210,6 +211,7 @@ def logout():
     session.pop('logeado', None)
     session.pop('usuario', None)
     session.pop('password', None)
+
     # redirecciona al login
     return redirect(url_for('index'))
 
