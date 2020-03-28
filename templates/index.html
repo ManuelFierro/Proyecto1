@@ -13,23 +13,23 @@
     {% endif %}
     <!-- contenido-mensajes  -->
 <!-- carrusel usando bootstrap -->
-<div id="demo" class="carousel slide" data-ride="carousel">
-  <ul class="carousel-indicators">
-    <li data-target="#demo" data-slide-to="0" class="active"></li>
-    <li data-target="#demo" data-slide-to="1"></li>
-    <li data-target="#demo" data-slide-to="2"></li>
-    <li data-target="#demo" data-slide-to="3"></li>
-    <li data-target="#demo" data-slide-to="4"></li>
-    <li data-target="#demo" data-slide-to="5"></li>
-    <li data-target="#demo" data-slide-to="6"></li>
-    <li data-target="#demo" data-slide-to="7"></li>
-    <li data-target="#demo" data-slide-to="8"></li>
-
-  </ul>
+<div id="slide" class="carousel slide carousel-fade" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#slide" data-slide-to="0" class="active"></li>
+    <li data-target="#slide" data-slide-to="1"></li>
+    <li data-target="#slide" data-slide-to="2"></li>
+    <li data-target="#slide" data-slide-to="3"></li>
+    <li data-target="#slide" data-slide-to="4"></li>
+    <li data-target="#slide" data-slide-to="5"></li>
+    <li data-target="#slide" data-slide-to="6"></li>
+    <li data-target="#slide" data-slide-to="7"></li>
+    <li data-target="#slide" data-slide-to="8"></li>
+  </ol>
   <!-- slides de letras  -->
   <div class="carousel-inner">
+
     <div class="carousel-item active">
-      <a href="{{ url_for('sidebar', letras='ABC') }}"><img class="d-block w-100" src="/static/img1.jpg"  height="600"></a>
+         <a href="{{ url_for('sidebar', letras='ABC') }}"><img class="d-block w-100" src="/static/img1.jpg"  height="600"></a>
       <div class="carousel-caption">
         <h1>A B C</h1>
       </div>
@@ -94,10 +94,10 @@
   <!-- slides de letras  -->
 
   <!-- controles del slide  -->
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+  <a class="carousel-control-prev" href="#slide" data-slide="prev">
     <span class="carousel-control-prev-icon"></span>
   </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next">
+  <a class="carousel-control-next" href="#slide" data-slide="next">
     <span class="carousel-control-next-icon"></span>
   </a>
     <!-- controles del slide  -->
